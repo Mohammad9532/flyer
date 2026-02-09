@@ -45,8 +45,8 @@ function App() {
     localStorage.setItem('flyer-studio-template', template);
   }, [data, template]);
 
-  // API Key for remove.bg (hidden from UI)
-  const apiKey = 'oHHarfm2AaEHbjWrYUEzWFcj';
+  // API Key for remove.bg (from .env)
+  const apiKey = import.meta.env.VITE_REMOVE_BG_API_KEY;
   const [isRemoving, setIsRemoving] = useState(false);
   const [isBulkOpen, setIsBulkOpen] = useState(false);
   const [isBatchExporting, setIsBatchExporting] = useState(false);
