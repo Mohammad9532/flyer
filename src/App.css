@@ -1,0 +1,677 @@
+:root {
+  --primary: #2D5A27;
+  --secondary: #F4A261;
+  --bg-studio: #1e1e1e;
+  --bg-sidebar: #121212;
+  --bg-workspace: #1a1a1a;
+  --border: #333;
+  --text-main: #e0e0e0;
+  --text-dim: #888;
+  --surface-active: #252525;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-studio);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+/* Studio Layout Container */
+.studio-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 1. TOP HEADER */
+.studio-header {
+  height: 60px;
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.studio-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.header-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+
+.template-indicator {
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+}
+
+.studio-btn-bulk-toggle {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: #252525;
+  border: 1px solid #333;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.studio-btn-bulk-toggle:hover {
+  background: #333;
+  border-color: var(--secondary);
+}
+
+.studio-btn-bulk-toggle svg {
+  color: var(--secondary);
+}
+
+.studio-btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  background: var(--primary);
+  color: white;
+}
+
+.studio-btn-primary:hover {
+  background: #387031;
+  transform: translateY(-1px);
+}
+
+/* MAIN WORKSPACE */
+.studio-main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* 2. CENTRAL WORKSPACE */
+.studio-workspace {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-workspace);
+  position: relative;
+  overflow: hidden;
+}
+
+.canvas-viewport {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+/* The Canvas (Printable Area) */
+.flyer-canvas {
+  background: white;
+  width: 4in;
+  height: 6in;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  transform-origin: center center;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.flyer-canvas.landscape {
+  width: 6in;
+  height: 4in;
+}
+
+.flyer-canvas.a4 {
+  width: 8.27in;
+  height: 11.69in;
+}
+
+.flyer-canvas.a4.landscape {
+  width: 11.69in;
+  height: 8.27in;
+}
+
+/* BOTTOM TEMPLATE DOCK */
+.template-dock {
+  background: var(--bg-sidebar);
+  border-top: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dock-header {
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.dock-scroll {
+  display: flex;
+  gap: 0.8rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.dock-item {
+  min-width: 90px;
+  height: 55px;
+  background: var(--surface-active);
+  border: 2px solid #222;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dock-item:hover {
+  border-color: #444;
+  background: #2a2a2a;
+}
+
+.dock-item.active {
+  border-color: var(--primary);
+  background: #1a2a1a;
+}
+
+.item-icon {
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.item-label {
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: var(--text-dim);
+}
+
+.dock-item.active .item-label {
+  color: #fff;
+}
+
+/* 3. SETTINGS PANEL */
+.settings-panel {
+  width: 340px;
+  background: var(--bg-sidebar);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.panel-title {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.panel-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.control-group label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #555;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  letter-spacing: 1px;
+}
+
+/* PAPER TOGGLE */
+.toggle-group {
+  display: flex;
+  gap: 4px;
+  background: #1a1a1a;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.toggle-item {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle-item.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* SELECTS & INPUTS */
+.control-select {
+  width: 100%;
+  padding: 0.8rem;
+  background: #1a1a1a;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.control-select:focus {
+  border-color: var(--primary);
+}
+
+.control-select option {
+  background: var(--bg-sidebar);
+  color: #fff;
+  padding: 10px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 1rem;
+}
+
+.field-label {
+  font-size: 0.6rem;
+  color: #444;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.control-input {
+  background: #1a1a1a;
+  border: 1px solid var(--border);
+  padding: 0.7rem;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.control-input:focus {
+  border-color: var(--primary);
+}
+
+.field-row {
+  display: flex;
+  gap: 10px;
+}
+
+/* IMAGE CONTROLS */
+.upload-trigger {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem;
+  background: var(--surface-active);
+  border: 1px dashed #444;
+  height: 44px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--text-main);
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.upload-trigger:hover {
+  background: #2a2a2a;
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.magic-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  height: 44px;
+  padding: 0 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.4rem;
+  text-align: center;
+}
+
+.magic-btn:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.magic-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.magic-btn.loading {
+  background: #60a5fa;
+}
+
+.sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.slider-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: #888;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.studio-range {
+  width: 100%;
+  height: 4px;
+  appearance: none;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+}
+
+.studio-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--primary);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.studio-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* UTIL */
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.w-70 {
+  width: 70px;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.text-xs {
+  font-size: 0.7rem;
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
+[class*="prod-name"],
+[class*="price"],
+[class*="branding"] {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+[class*="prod-name"]:hover,
+[class*="price"]:hover,
+[class*="branding"]:hover {
+  opacity: 0.8;
+}
+
+.logo-bold-header,
+.logo-bogo-footer,
+.logo-minimal-header {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ROBUST PRINT RESET */
+@media print {
+  @page {
+    margin: 0;
+    size: portrait;
+  }
+
+  /* 1. Hide EVERYTHING by default */
+  * {
+    visibility: hidden !important;
+  }
+
+  /* 2. Reveal the flyer and its necessary structure */
+  .studio-container,
+  .studio-main,
+  .studio-workspace,
+  .canvas-viewport,
+  .canvas-preview-wrapper,
+  .flyer-canvas,
+  .flyer-canvas * {
+    visibility: visible !important;
+  }
+
+  /* 3. Strip layout constraints - Aligned for 2-up (Top Half) */
+  .studio-container,
+  .studio-main,
+  .studio-workspace,
+  .canvas-viewport,
+  .canvas-preview-wrapper {
+    display: flex !important;
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    /* Anchor to TOP for print */
+    transform: none !important;
+  }
+
+  /* 4. Shelf Size - Aligned to Top for 2-up printing */
+  .flyer-canvas {
+    position: relative !important;
+    margin: 1rem 0 0 0 !important;
+    box-shadow: none !important;
+    width: 90vw !important;
+    height: auto !important;
+    max-height: 48vh !important;
+    object-fit: contain;
+    transform: none !important;
+    page-break-after: avoid !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* 5. A4 Full Scale - Still fills page */
+  .flyer-canvas.a4 {
+    width: 100% !important;
+    height: 100vh !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+    max-height: none !important;
+  }
+
+  /* Force Graphics */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+.batch-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.batch-loader h3 { font-size: 1.5rem; font-weight: 900; letter-spacing: 4px; margin: 1.5rem 0 0.5rem; color: var(--secondary); }
+.batch-loader p { font-size: 0.8rem; color: #888; }
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #333;
+  border-top: 4px solid var(--secondary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.settings-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.settings-modal {
+  background: #121212;
+  width: 400px;
+  border-radius: 16px;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+}
+
+.settings-header { padding: 1.2rem; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+.settings-header h3 { font-size: 0.9rem; font-weight: 900; letter-spacing: 2px; color: #fff; }
+.settings-header button { background: none; border: none; color: #666; cursor: pointer; font-size: 1.2rem; }
+
+.settings-content { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
+.settings-content .divider { height: 1px; background: #333; margin: 0.5rem 0; }
+.help-text { font-size: 0.65rem; color: #666; font-style: italic; line-height: 1.4; }
+
+.settings-footer { padding: 1.2rem; border-top: 1px solid #333; display: flex; justify-content: flex-end; }
+
