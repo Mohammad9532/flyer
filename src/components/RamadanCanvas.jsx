@@ -53,10 +53,17 @@ const RamadanCanvas = ({ data, template, activeImageIndex, onSelectImage, onUpda
         );
     });
 
+    const renderLogo = (className, fallbackText) => {
+        if (logo) {
+            return <img src={logo} className={`logo-${className}`} alt="Logo" style={{ height: '40px', objectFit: 'contain' }} />;
+        }
+        return <div className={`branding-${className}`}>{fallbackText || branding || 'NATURAL FRESH EXPRESS'}</div>;
+    };
+
     const templates = {
         'lantern_glow': (
             <div className="ramadan-template lantern-glow" style={{ backgroundColor: bgColor || '#1a237e' }}>
-                <div className="lantern-top">🪔 RAMADAN KAREEM 🪔</div>
+                <div className="lantern-top">{renderLogo('mini-ramadan', 'RAMADAN KAREEM')}</div>
                 {renderImages('ramadan')}
                 <div className="ramadan-content">
                     <h1 className="prod-name-ramadan">{productName}</h1>
@@ -68,7 +75,7 @@ const RamadanCanvas = ({ data, template, activeImageIndex, onSelectImage, onUpda
         'moroccan_nights': (
             <div className="ramadan-template moroccan-nights" style={{ backgroundColor: bgColor || '#0d47a1' }}>
                 <div className="pattern-overlay"></div>
-                <div className="moroccan-header">ELEGANT RAMADAN</div>
+                <div className="moroccan-header">{renderLogo('moroccan-header', 'ELEGANT RAMADAN')}</div>
                 {renderImages('ramadan')}
                 <div className="moroccan-footer">
                     <h2 className="prod-name-moroccan">{productName}</h2>

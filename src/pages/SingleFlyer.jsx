@@ -354,16 +354,8 @@ function SingleFlyer() {
                             alignItems: 'center',
                             justifyContent: 'center'
                         }}>
-                            <FlyerCanvas
-                                data={data}
-                                template={template}
-                                onFocusField={focusField}
-                                activeImageIndex={activeImageIndex}
-                                onSelectImage={setActiveImageIndex}
-                                onUpdateImage={handleUpdateImage}
-                            />
                             {template.startsWith('ramadan_') || ['ramadan', 'iftar', 'suhoor'].includes(template) ? (
-                                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+                                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
                                     <RamadanCanvas
                                         data={data}
                                         template={template}
@@ -372,7 +364,16 @@ function SingleFlyer() {
                                         onUpdateImage={handleUpdateImage}
                                     />
                                 </div>
-                            ) : null}
+                            ) : (
+                                <FlyerCanvas
+                                    data={data}
+                                    template={template}
+                                    onFocusField={focusField}
+                                    activeImageIndex={activeImageIndex}
+                                    onSelectImage={setActiveImageIndex}
+                                    onUpdateImage={handleUpdateImage}
+                                />
+                            )}
                         </div>
                     </div>
 

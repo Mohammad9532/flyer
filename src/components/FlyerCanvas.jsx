@@ -209,52 +209,9 @@ const FlyerCanvas = ({ data, template, onFocusField, activeImageIndex, onSelectI
           </div>
         );
       case 'ramadan':
-        return (
-          <div className="flyer-inner ramadan-template">
-            <div className="ramadan-moon">🌙 Ramadan Kareem</div>
-            {renderImages('ramadan')}
-            <div className="ramadan-info text-center">
-              <h2 className="prod-name-ramadan">{productName || 'RAMADAN SPECIAL'}</h2>
-              <div className="ramadan-price">
-                <span className="curr-ram">{currency}</span>
-                <span className="amt-ram">{price || '0.00'}</span>
-              </div>
-            </div>
-            <div className="ramadan-footer">{branding}</div>
-          </div>
-        );
       case 'iftar':
-        return (
-          <div className="flyer-inner iftar-template">
-            <div className="iftar-header">✨ IFTAR SPECIAL ✨</div>
-            {renderImages('iftar')}
-            <div className="iftar-content">
-              <h2 className="prod-name-iftar">{productName || 'Iftar Box / Dates'}</h2>
-              <p className="iftar-sub">Break your fast with quality</p>
-              <div className="iftar-price-box">
-                <div className="iftar-label">SPECIAL PRICE</div>
-                <div className="iftar-price">{currency} {price}</div>
-              </div>
-            </div>
-            <div className="iftar-footer">{branding}</div>
-          </div>
-        );
       case 'suhoor':
-        return (
-          <div className="flyer-inner suhoor-template">
-            <div className="suhoor-badge">SUHOOR ESSENTIALS</div>
-            {renderImages('suhoor')}
-            <div className="suhoor-body text-center">
-              <h2 className="prod-name-suhoor">{productName || 'Fresh Milk / Yogurt'}</h2>
-              <div className="suhoor-promo">{discount || 'Healthy Morning'}</div>
-              <div className="suhoor-price">
-                <span className="suh-curr">{currency}</span>
-                {price}
-              </div>
-            </div>
-            <div className="suhoor-footer">{branding}</div>
-          </div>
-        );
+        return null;
       case 'member':
         return (
           <div className="flyer-inner member-template">
