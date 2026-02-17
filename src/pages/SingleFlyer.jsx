@@ -3,7 +3,6 @@ import { Printer, Upload, Layout, Type, DollarSign, Tag, Image as ImageIcon, Pac
 import FlyerCanvas from '../components/FlyerCanvas';
 import BulkManager from '../components/BulkManager';
 import ImageAdjuster from '../components/ImageAdjuster';
-import RamadanCanvas from '../components/RamadanCanvas';
 
 function SingleFlyer() {
     const viewportRef = useRef(null);
@@ -28,8 +27,7 @@ function SingleFlyer() {
             orientation: 'portrait',
             images: [], // Multiple images support
             logo: null,
-            paperSize: 'shelf',
-            bgColor: '#ffffff'
+            paperSize: 'shelf'
         };
     });
 
@@ -354,26 +352,14 @@ function SingleFlyer() {
                             alignItems: 'center',
                             justifyContent: 'center'
                         }}>
-                            {template.startsWith('ramadan_') || ['ramadan', 'iftar', 'suhoor'].includes(template) ? (
-                                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-                                    <RamadanCanvas
-                                        data={data}
-                                        template={template}
-                                        activeImageIndex={activeImageIndex}
-                                        onSelectImage={setActiveImageIndex}
-                                        onUpdateImage={handleUpdateImage}
-                                    />
-                                </div>
-                            ) : (
-                                <FlyerCanvas
-                                    data={data}
-                                    template={template}
-                                    onFocusField={focusField}
-                                    activeImageIndex={activeImageIndex}
-                                    onSelectImage={setActiveImageIndex}
-                                    onUpdateImage={handleUpdateImage}
-                                />
-                            )}
+                            <FlyerCanvas
+                                data={data}
+                                template={template}
+                                onFocusField={focusField}
+                                activeImageIndex={activeImageIndex}
+                                onSelectImage={setActiveImageIndex}
+                                onUpdateImage={handleUpdateImage}
+                            />
                         </div>
                     </div>
 
@@ -381,80 +367,47 @@ function SingleFlyer() {
                     <div className="template-dock">
                         <div className="dock-header">Templates</div>
                         <div className="dock-scroll">
-                            <div className="dock-group">
-                                <div className="group-label">General</div>
-                                <div className="group-items">
-                                    {[
-                                        { id: 'discount', label: 'Discount', icon: '🏷️' },
-                                        { id: 'bold', label: 'Bold', icon: '🔥' },
-                                        { id: 'bogo', label: 'BOGO', icon: '🎁' },
-                                        { id: 'organic', label: 'Organic', icon: '🍃' },
-                                        { id: 'clearance', label: 'Clearance', icon: '⚠️' },
-                                        { id: 'new', label: 'New', icon: '🆕' },
-                                        { id: 'manager', label: 'Choice', icon: '⭐' },
-                                        { id: 'flash', label: 'Flash', icon: '⚡' },
-                                        { id: 'healthy', label: 'Healthy', icon: '❤️' },
-                                        { id: 'member', label: 'VIP', icon: '👑' },
-                                        { id: 'minimal', label: 'Basic', icon: '📄' },
-                                    ].map(item => (
-                                        <div
-                                            key={item.id}
-                                            className={`dock-item ${template === item.id ? 'active' : ''}`}
-                                            onClick={() => setTemplate(item.id)}
-                                        >
-                                            <div className="item-icon">{item.icon}</div>
-                                            <span className="item-label">{item.label}</span>
-                                        </div>
-                                    ))}
+                            {[
+                                { id: 'ramadan-gold', label: 'R-Gold', icon: '✨' },
+                                { id: 'ramadan-night', label: 'R-Night', icon: '🌃' },
+                                { id: 'ramadan-lantern', label: 'R-Lantern', icon: '🪔' },
+                                { id: 'ramadan-pattern', label: 'R-Pattern', icon: '💠' },
+                                { id: 'ramadan-classic', label: 'R-Classic', icon: '🕋' },
+                                { id: 'ramadan-modern', label: 'R-Modern', icon: '☪️' },
+                                { id: 'ramadan-royal', label: 'R-Royal', icon: '💎' },
+                                { id: 'ramadan-floral', label: 'R-Floral', icon: '🌸' },
+                                { id: 'ramadan-moonlight', label: 'R-Moon', icon: '🌜' },
+                                { id: 'ramadan-sunset', label: 'R-Sunset', icon: '🌇' },
+                                { id: 'ramadan-oasis', label: 'R-Oasis', icon: '🌴' },
+                                { id: 'ramadan-mosque', label: 'R-Mosque', icon: '🕌' },
+                                { id: 'ramadan-stars', label: 'R-Stars', icon: '⭐' },
+                                { id: 'ramadan-kareem', label: 'R-Kareem', icon: '✉️' },
+                                { id: 'ramadan-mubarak', label: 'R-Mubarak', icon: '🏮' },
+                                { id: 'discount', label: 'Discount', icon: '🏷️' },
+                                { id: 'bold', label: 'Bold', icon: '🔥' },
+                                { id: 'ramadan', label: 'Ramadan', icon: '🌙' },
+                                { id: 'iftar', label: 'Iftar', icon: '✨' },
+                                { id: 'suhoor', label: 'Suhoor', icon: '🕌' },
+                                { id: 'bogo', label: 'BOGO', icon: '🎁' },
+                                { id: 'organic', label: 'Organic', icon: '🍃' },
+                                { id: 'clearance', label: 'Clearance', icon: '⚠️' },
+                                { id: 'new', label: 'New', icon: '🆕' },
+                                { id: 'manager', label: 'Choice', icon: '⭐' },
+                                { id: 'flash', label: 'Flash', icon: '⚡' },
+                                { id: 'healthy', label: 'Healthy', icon: '❤️' },
+                                { id: 'member', label: 'VIP', icon: '👑' },
+                                { id: 'minimal', label: 'Basic', icon: '📄' },
+                            ].map(item => (
+                                <div
+                                    key={item.id}
+                                    className={`dock-item ${template === item.id ? 'active' : ''}`}
+                                    onClick={() => setTemplate(item.id)}
+                                >
+                                    <div className="item-icon">{item.icon}</div>
+                                    <span className="item-label">{item.label}</span>
                                 </div>
-                            </div>
-
-                            <div className="dock-group ramadan-folder">
-                                <div className="group-label">🌙 Ramadan Collection</div>
-                                <div className="group-items horizontal-scroll">
-                                    {[
-                                        { id: 'ramadan', label: 'Kareem', icon: '🌙' },
-                                        { id: 'iftar', label: 'Iftar', icon: '✨' },
-                                        { id: 'suhoor', label: 'Suhoor', icon: '🕌' },
-                                        { id: 'lantern_glow', label: 'Lantern', icon: '🪔' },
-                                        { id: 'moroccan_nights', label: 'Moroccan', icon: '🌌' },
-                                        { id: 'desert_sunset', label: 'Desert', icon: '🐫' },
-                                        { id: 'modern_arabesque', label: 'Modern', icon: '💠' },
-                                        { id: 'calligraphy_gold', label: 'Gold', icon: '📜' },
-                                        { id: 'mosque_silhouette', label: 'Mosque', icon: '🏰' },
-                                        { id: 'floral_ramadan', label: 'Floral', icon: '🌸' },
-                                        { id: 'ramadan_gift', label: 'Gift', icon: '🎁' },
-                                        { id: 'crescent_star', label: 'Crescent', icon: '⭐' },
-                                        { id: 'iftar_feast', label: 'Feast', icon: '🍛' },
-                                        { id: 'spiritual_blue', label: 'Spiritual', icon: '💆' },
-                                        { id: 'luxury_gold', label: 'Luxury', icon: '💎' },
-                                        { id: 'ramadan_traditional', label: 'Trad', icon: '🎋' },
-                                        { id: 'pink_blossom', label: 'Pink', icon: '💮' },
-                                        { id: 'midnight_prayer', label: 'Midnight', icon: '🌑' },
-                                    ].map(item => (
-                                        <div
-                                            key={item.id}
-                                            className={`dock-item ${template === item.id ? 'active' : ''}`}
-                                            onClick={() => setTemplate(item.id)}
-                                        >
-                                            <div className="item-icon">{item.icon}</div>
-                                            <span className="item-label">{item.label}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                            ))}
                         </div>
-                        <style>{`
-                            .dock-scroll { display: flex; flex-direction: column; gap: 1.5rem; padding-bottom: 1rem; }
-                            .dock-group { display: flex; flex-direction: column; gap: 0.8rem; }
-                            .group-label { font-size: 0.75rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 1px; padding-left: 0.5rem; border-left: 3px solid #444; }
-                            .group-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 0.8rem; }
-                            .group-items.horizontal-scroll { display: flex; overflow-x: auto; padding-bottom: 0.5rem; gap: 0.8rem; grid-template-columns: none; }
-                            .ramadan-folder .group-label { color: #ffd700; border-left-color: #ffd700; }
-                            .group-items.horizontal-scroll::-webkit-scrollbar { height: 4px; }
-                            .group-items.horizontal-scroll::-webkit-scrollbar-track { background: #1a1a1a; }
-                            .group-items.horizontal-scroll::-webkit-scrollbar-thumb { background: #ffd700; border-radius: 10px; }
-                        `}</style>
                     </div>
                 </section>
 
@@ -505,42 +458,6 @@ function SingleFlyer() {
                                 <option value="'Righteous', cursive">Display (Righteous)</option>
                                 <option value="'Libre Baskerville', serif">Newspaper (Baskerville)</option>
                             </select>
-                        </div>
-
-                        {/* BACKGROUND COLOR */}
-                        <div className="control-group">
-                            <label>Background Canvas</label>
-                            <div className="field-row align-center gap-3">
-                                <input
-                                    type="color"
-                                    name="bgColor"
-                                    value={data.bgColor || '#ffffff'}
-                                    onChange={handleChange}
-                                    className="color-picker-input"
-                                />
-                                <input
-                                    type="text"
-                                    name="bgColor"
-                                    value={data.bgColor || '#ffffff'}
-                                    onChange={handleChange}
-                                    className="control-input flex-1 uppercase"
-                                    placeholder="#FFFFFF"
-                                />
-                            </div>
-                            <style>{`
-                                .color-picker-input {
-                                    width: 44px;
-                                    height: 44px;
-                                    padding: 0;
-                                    border: 2px solid #333;
-                                    border-radius: 8px;
-                                    background: none;
-                                    cursor: pointer;
-                                    overflow: hidden;
-                                }
-                                .color-picker-input::-webkit-color-swatch-wrapper { padding: 0; }
-                                .color-picker-input::-webkit-color-swatch { border: none; }
-                            `}</style>
                         </div>
 
                         {/* PRODUCT DETAILS */}

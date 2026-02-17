@@ -36,7 +36,7 @@ const GridFlyerCanvas = ({ products, template, fontFamily, logo, branding }) => 
     <div className={`grid-flyer-canvas ${template}`} style={{ fontFamily }}>
       <div className="grid-header">
         {logo ? <img src={logo} alt="Logo" className="grid-logo" /> : <div className="grid-branding">{branding || 'SUPERMARKET'}</div>}
-        {template === 'ramadan' && <div className="ramadan-title">RAMADAN KAREEM</div>}
+        {template.startsWith('ramadan') && <div className="ramadan-title">RAMADAN KAREEM</div>}
       </div>
 
       <div className="grid-container">
@@ -44,7 +44,7 @@ const GridFlyerCanvas = ({ products, template, fontFamily, logo, branding }) => 
       </div>
 
       <div className="grid-footer">
-        {template === 'ramadan' && <span>Special Ramadan Offers - Quality You Can Trust</span>}
+        {template.startsWith('ramadan') && <span>Special Ramadan Offers - Quality You Can Trust</span>}
         {template === 'luxury' && <span style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '2px' }}>EXCLUSIVELY CRAFTED FOR YOU</span>}
         {template === 'organic' && <span>FARM FRESH • SUSTAINABLE • 100% NATURAL</span>}
         {template === 'flash' && <span style={{ fontWeight: 900 }}>⚡ HURRY! LIMITED TIME OFFERS ⚡</span>}
@@ -209,12 +209,12 @@ const GridFlyerCanvas = ({ products, template, fontFamily, logo, branding }) => 
            --------------------------------- */
 
         /* 1. Ramadan Theme (Boxed) */
-        .grid-flyer-canvas.ramadan { background: #1a237e; border: 8px solid #ffd700; }
-        .grid-flyer-canvas.ramadan .grid-header { border-bottom-color: #ffd700; color: #ffd700; }
-        .grid-flyer-canvas.ramadan .grid-branding { color: #ffd700; }
-        .grid-flyer-canvas.ramadan .ramadan-title { font-size: 1.2rem; font-weight: 900; letter-spacing: 2px; }
-        .grid-flyer-canvas.ramadan .grid-item { background: rgba(255, 255, 255, 0.95); border-color: #ffd700; }
-        .grid-flyer-canvas.ramadan .grid-footer { border-top-color: #ffd700; color: #ffd700; }
+        [class*="grid-flyer-canvas ramadan"] { background: #1a237e; border: 8px solid #ffd700; }
+        [class*="grid-flyer-canvas ramadan"] .grid-header { border-bottom-color: #ffd700; color: #ffd700; }
+        [class*="grid-flyer-canvas ramadan"] .grid-branding { color: #ffd700; }
+        [class*="grid-flyer-canvas ramadan"] .ramadan-title { font-size: 1.2rem; font-weight: 900; letter-spacing: 2px; }
+        [class*="grid-flyer-canvas ramadan"] .grid-item { background: rgba(255, 255, 255, 0.95); border-color: #ffd700; }
+        [class*="grid-flyer-canvas ramadan"] .grid-footer { border-top-color: #ffd700; color: #ffd700; }
 
         /* 2. Minimal Theme (BOX-LESS) */
         .grid-flyer-canvas.minimal { background: #fff; padding: 0.7in; }

@@ -243,6 +243,21 @@ const Grid2x2Flyer = () => {
                         <div className="dock-header">Themes</div>
                         <div className="dock-scroll">
                             {[
+                                { id: 'ramadan-gold', label: 'R-Gold', icon: '✨' },
+                                { id: 'ramadan-night', label: 'R-Night', icon: '🌃' },
+                                { id: 'ramadan-lantern', label: 'R-Lantern', icon: '🪔' },
+                                { id: 'ramadan-pattern', label: 'R-Pattern', icon: '💠' },
+                                { id: 'ramadan-classic', label: 'R-Classic', icon: '🕋' },
+                                { id: 'ramadan-modern', label: 'R-Modern', icon: '☪️' },
+                                { id: 'ramadan-royal', label: 'R-Royal', icon: '💎' },
+                                { id: 'ramadan-floral', label: 'R-Floral', icon: '🌸' },
+                                { id: 'ramadan-moonlight', label: 'R-Moon', icon: '🌜' },
+                                { id: 'ramadan-sunset', label: 'R-Sunset', icon: '🌇' },
+                                { id: 'ramadan-oasis', label: 'R-Oasis', icon: '🌴' },
+                                { id: 'ramadan-mosque', label: 'R-Mosque', icon: '🕌' },
+                                { id: 'ramadan-stars', label: 'R-Stars', icon: '⭐' },
+                                { id: 'ramadan-kareem', label: 'R-Kareem', icon: '✉️' },
+                                { id: 'ramadan-mubarak', label: 'R-Mubarak', icon: '🏮' },
                                 { id: 'discount', label: 'Discount', icon: '🏷️' },
                                 { id: 'bold', label: 'Bold', icon: '🔥' },
                                 { id: 'ramadan', label: 'Ramadan', icon: '🌙' },

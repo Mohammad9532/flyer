@@ -209,9 +209,275 @@ const FlyerCanvas = ({ data, template, onFocusField, activeImageIndex, onSelectI
           </div>
         );
       case 'ramadan':
+        return (
+          <div className="flyer-inner ramadan-template">
+            <div className="ramadan-moon">🌙 Ramadan Kareem</div>
+            {renderImages('ramadan')}
+            <div className="ramadan-info text-center">
+              <h2 className="prod-name-ramadan">{productName || 'RAMADAN SPECIAL'}</h2>
+              <div className="ramadan-price">
+                <span className="curr-ram">{currency}</span>
+                <span className="amt-ram">{price || '0.00'}</span>
+              </div>
+            </div>
+            <div className="ramadan-footer">{branding}</div>
+          </div>
+        );
+      case 'ramadan-gold':
+        return (
+          <div className="flyer-inner r-gold-template">
+            <div className="r-gold-pattern"></div>
+            <div className="r-gold-header">✨ RAMADAN EXCLUSIVE ✨</div>
+            {renderImages('r-gold')}
+            <div className="r-gold-content">
+              <h2 className="prod-name-r-gold">{productName}</h2>
+              <div className="r-gold-price-tag">
+                <div className="r-gold-curr">{currency}</div>
+                <div className="r-gold-amt">{price}</div>
+              </div>
+            </div>
+            <div className="r-gold-footer">{branding} • ELEGANCE IN EVERY BITE</div>
+          </div>
+        );
+      case 'ramadan-night':
+        return (
+          <div className="flyer-inner r-night-template">
+            <div className="r-night-stars"></div>
+            <div className="r-night-moon">🌙</div>
+            <div className="r-night-header">NIGHTLY SPECIALS</div>
+            {renderImages('r-night')}
+            <div className="r-night-container">
+              <h2 className="prod-name-r-night">{productName}</h2>
+              <div className="r-night-price-box">
+                <span className="r-night-amt">{currency} {price}</span>
+              </div>
+            </div>
+            <div className="r-night-footer">{branding}</div>
+          </div>
+        );
+      case 'ramadan-lantern':
+        return (
+          <div className="flyer-inner r-lantern-template">
+            <div className="r-lantern-icon">🪔</div>
+            <div className="r-lantern-header">RAMADAN LIGHTS</div>
+            {renderImages('r-lantern')}
+            <div className="r-lantern-body">
+              <h2 className="prod-name-r-lantern">{productName}</h2>
+              <div className="r-lantern-price-circle">
+                <div className="r-lantern-price-val">{price}</div>
+                <div className="r-lantern-price-curr">{currency}</div>
+              </div>
+            </div>
+            <div className="r-lantern-footer">{branding}</div>
+          </div>
+        );
+      case 'ramadan-pattern':
+        return (
+          <div className="flyer-inner r-pattern-template">
+            <div className="r-pattern-overlay"></div>
+            <div className="r-pattern-header">TRADITIONAL SAVINGS</div>
+            {renderImages('r-pattern')}
+            <div className="r-pattern-info">
+              <h2 className="prod-name-r-pattern">{productName}</h2>
+              <div className="r-pattern-price-wrap">
+                <span className="r-pattern-price">{currency} {price}</span>
+              </div>
+            </div>
+            <div className="r-pattern-footer">{branding}</div>
+          </div>
+        );
+      case 'ramadan-classic':
+        return (
+          <div className="flyer-inner r-classic-template">
+            <div className="r-classic-top">RAMADAN KAREEM</div>
+            {renderImages('r-classic')}
+            <div className="r-classic-main">
+              <h2 className="prod-name-r-classic">{productName}</h2>
+              <div className="r-classic-price">
+                <span className="r-cl-curr">{currency}</span>
+                <span className="r-cl-amt">{price}</span>
+              </div>
+            </div>
+            <div className="r-classic-bottom">{branding}</div>
+          </div>
+        );
+      case 'ramadan-modern':
+        return (
+          <div className="flyer-inner r-modern-template">
+            <div className="r-modern-side"></div>
+            <div className="r-modern-header">Ramadan Modern</div>
+            {renderImages('r-modern')}
+            <div className="r-modern-content">
+              <h2 className="prod-name-r-modern">{productName}</h2>
+              <div className="r-modern-price">
+                <span className="r-modern-symbol">{currency}</span>
+                {price}
+              </div>
+            </div>
+            <div className="r-modern-footer">#RAMADAN2024 • {branding}</div>
+          </div>
+        );
+      case 'ramadan-royal':
+        return (
+          <div className="flyer-inner r-royal-template">
+            <div className="r-royal-border"></div>
+            <div className="r-royal-header">ROYAL RAMADAN</div>
+            {renderImages('r-royal')}
+            <div className="r-royal-details">
+              <h2 className="prod-name-r-royal">{productName}</h2>
+              <div className="r-royal-price-box">
+                <div className="r-royal-label">Value Price</div>
+                <div className="r-royal-value">{currency} {price}</div>
+              </div>
+            </div>
+            <div className="r-royal-footer">{branding}</div>
+          </div>
+        );
+      case 'ramadan-floral':
+        return (
+          <div className="flyer-inner r-floral-template">
+            <div className="r-floral-bg"></div>
+            <div className="r-floral-header">BLOOMING RAMADAN</div>
+            {renderImages('r-floral')}
+            <div className="r-floral-info">
+              <h2 className="prod-name-r-floral">{productName}</h2>
+              <div className="r-floral-price">{currency}{price}</div>
+            </div>
+            <div className="r-floral-footer">{branding}</div>
+          </div>
+        );
+      case 'ramadan-moonlight':
+        return (
+          <div className="flyer-inner r-moonlight-template">
+            <div className="r-moon-glow"></div>
+            <div className="r-moon-header">MOONLIGHT DEALS</div>
+            {renderImages('r-moon')}
+            <div className="r-moon-content text-center">
+              <h2 className="prod-name-r-moon">{productName}</h2>
+              <div className="r-moon-price-tag">{currency} {price}</div>
+            </div>
+            <div className="r-moon-footer">{branding}</div>
+          </div>
+        );
+      case 'ramadan-sunset':
+        return (
+          <div className="flyer-inner r-sunset-template">
+            <div className="r-sunset-gradient"></div>
+            <div className="r-sunset-header">AWAKENING FLAVORS</div>
+            {renderImages('r-sunset')}
+            <div className="r-sunset-info text-center">
+              <h2 className="prod-name-r-sunset">{productName}</h2>
+              <div className="r-sunset-price">
+                <span className="r-sunset-curr">{currency}</span>
+                {price}
+              </div>
+            </div>
+            <div className="r-sunset-footer">{branding}</div>
+          </div>
+        );
+      case 'ramadan-oasis':
+        return (
+          <div className="flyer-inner r-oasis-template">
+            <div className="r-oasis-palms">🌴🌴🌴</div>
+            <div className="r-oasis-header">OASIS REFRESHMENTS</div>
+            {renderImages('r-oasis')}
+            <div className="r-oasis-content">
+              <h2 className="prod-name-r-oasis">{productName || 'Fresh Organic Dates'}</h2>
+              <div className="r-oasis-price-box">
+                <span className="r-oasis-price">{currency} {price}</span>
+              </div>
+            </div>
+            <div className="r-oasis-footer">PURE & NATURAL • {branding}</div>
+          </div>
+        );
+      case 'ramadan-mosque':
+        return (
+          <div className="flyer-inner r-mosque-template">
+            <div className="r-mosque-silhouette"></div>
+            <div className="r-mosque-header">BLESSED SAVINGS</div>
+            {renderImages('r-mosque')}
+            <div className="r-mosque-info">
+              <h2 className="prod-name-r-mosque">{productName}</h2>
+              <div className="r-mosque-price">{currency} {price}</div>
+            </div>
+            <div className="r-mosque-footer">{branding}</div>
+          </div>
+        );
+      case 'ramadan-stars':
+        return (
+          <div className="flyer-inner r-stars-template">
+            <div className="r-stars-container"></div>
+            <div className="r-stars-header">STARRY RAMADAN</div>
+            {renderImages('r-stars')}
+            <div className="r-stars-body">
+              <h2 className="prod-name-r-stars">{productName}</h2>
+              <div className="r-stars-price-badge">
+                <span className="r-stars-price">{currency} {price}</span>
+              </div>
+            </div>
+            <div className="r-stars-footer">{branding}</div>
+          </div>
+        );
+      case 'ramadan-kareem':
+        return (
+          <div className="flyer-inner r-kareem-template">
+            <div className="r-kareem-badge">RARE OFFER</div>
+            <div className="r-kareem-title">Ramadan Kareem</div>
+            {renderImages('r-kareem')}
+            <div className="r-kareem-info">
+              <h2 className="prod-name-r-kareem">{productName}</h2>
+              <div className="r-kareem-price">{currency} {price}</div>
+            </div>
+            <div className="r-kareem-footer">{branding}</div>
+          </div>
+        );
+      case 'ramadan-mubarak':
+        return (
+          <div className="flyer-inner r-mubarak-template">
+            <div className="r-mubarak-header">Eid Mubarak Deals</div>
+            {renderImages('r-mubarak')}
+            <div className="r-mubarak-content text-center">
+              <h2 className="prod-name-r-mubarak">{productName}</h2>
+              <div className="r-mubarak-price-wrap">
+                <span className="r-mubarak-label">SPECIAL MUBARAK PRICE</span>
+                <div className="r-mubarak-price">{currency} {price}</div>
+              </div>
+            </div>
+            <div className="r-mubarak-footer">{branding}</div>
+          </div>
+        );
       case 'iftar':
+        return (
+          <div className="flyer-inner iftar-template">
+            <div className="iftar-header">✨ IFTAR SPECIAL ✨</div>
+            {renderImages('iftar')}
+            <div className="iftar-content">
+              <h2 className="prod-name-iftar">{productName || 'Iftar Box / Dates'}</h2>
+              <p className="iftar-sub">Break your fast with quality</p>
+              <div className="iftar-price-box">
+                <div className="iftar-label">SPECIAL PRICE</div>
+                <div className="iftar-price">{currency} {price}</div>
+              </div>
+            </div>
+            <div className="iftar-footer">{branding}</div>
+          </div>
+        );
       case 'suhoor':
-        return null;
+        return (
+          <div className="flyer-inner suhoor-template">
+            <div className="suhoor-badge">SUHOOR ESSENTIALS</div>
+            {renderImages('suhoor')}
+            <div className="suhoor-body text-center">
+              <h2 className="prod-name-suhoor">{productName || 'Fresh Milk / Yogurt'}</h2>
+              <div className="suhoor-promo">{discount || 'Healthy Morning'}</div>
+              <div className="suhoor-price">
+                <span className="suh-curr">{currency}</span>
+                {price}
+              </div>
+            </div>
+            <div className="suhoor-footer">{branding}</div>
+          </div>
+        );
       case 'member':
         return (
           <div className="flyer-inner member-template">
@@ -468,6 +734,140 @@ const FlyerCanvas = ({ data, template, onFocusField, activeImageIndex, onSelectI
         .suhoor-price { font-size: 3.5rem; font-weight: 900; color: #e63946; margin-top: 0.5rem; }
         .suh-curr { font-size: 1.2rem; vertical-align: top; }
         .suhoor-footer { margin-top: auto; text-align: center; font-weight: 800; color: #0288d1; font-size: 0.8rem; }
+
+        /* Ramadan Gold */
+        .r-gold-template { background: #1a1a1a; color: #d4af37; border: 4px solid #d4af37; }
+        .r-gold-pattern { position: absolute; top:0; left:0; right:0; bottom:0; opacity: 0.1; background-image: radial-gradient(#d4af37 1px, transparent 1px); background-size: 20px 20px; }
+        .r-gold-header { background: #d4af37; color: #000; padding: 0.5rem; text-align: center; font-weight: 900; margin: -1.5rem -1.5rem 1rem -1.5rem; }
+        .prod-name-r-gold { font-size: 1.8rem; font-weight: 900; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .r-gold-price-tag { background: #d4af37; color: #000; padding: 1rem; border-radius: 5px; margin-top: 1rem; transform: rotate(-2deg); display: inline-block; }
+        .r-gold-curr { font-size: 0.8rem; font-weight: bold; }
+        .r-gold-amt { font-size: 2.5rem; font-weight: 900; }
+        .r-gold-footer { margin-top: auto; text-align: center; border-top: 1px solid #d4af37; padding-top: 0.5rem; font-size: 0.7rem; font-weight: 700; }
+
+        /* Ramadan Night */
+        .r-night-template { background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); color: #f8fafc; }
+        .r-night-stars { position: absolute; inset:0; background-image: radial-gradient(white 1px, transparent 0); background-size: 50px 50px; opacity: 0.3; }
+        .r-night-moon { position: absolute; top: 20px; right: 20px; font-size: 3rem; opacity: 0.2; }
+        .r-night-header { text-align: center; font-weight: 900; letter-spacing: 4px; border-bottom: 2px solid #38bdf8; padding-bottom: 5px; margin-bottom: 1rem; }
+        .prod-name-r-night { font-size: 1.8rem; font-weight: 900; color: #38bdf8; }
+        .r-night-price-box { margin-top: 1rem; background: rgba(56, 189, 248, 0.2); padding: 0.8rem; border-radius: 12px; border: 1px solid #38bdf8; display: inline-block; }
+        .r-night-amt { font-size: 2.2rem; font-weight: 900; }
+        .r-night-footer { margin-top: auto; font-weight: bold; opacity: 0.8; }
+
+        /* Ramadan Lantern */
+        .r-lantern-template { background: #fff; border: 6px solid #f97316; }
+        .r-lantern-icon { position: absolute; top: -10px; right: 20px; font-size: 4rem; z-index: 10; transform: translateY(10px); }
+        .r-lantern-header { background: #f97316; color: #fff; padding: 0.8rem; margin: -1.5rem -1.5rem 1rem -1.5rem; font-weight: 900; font-size: 1.2rem; }
+        .prod-name-r-lantern { font-size: 1.8rem; font-weight: 800; color: #7c2d12; margin-top: 0.5rem; }
+        .r-lantern-price-circle { width: 100px; height: 100px; background: #ea580c; color: #fff; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 1rem auto; box-shadow: 0 5px 15px rgba(234, 88, 12, 0.4); }
+        .r-lantern-price-val { font-size: 2rem; font-weight: 900; line-height: 1; }
+        .r-lantern-price-curr { font-size: 0.7rem; font-weight: bold; }
+        .r-lantern-footer { margin-top: auto; font-weight: 900; color: #f97316; }
+
+        /* Ramadan Pattern */
+        .r-pattern-template { background: #fefce8; }
+        .r-pattern-overlay { position: absolute; inset:0; background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjZjVkYjY3IiBmaWxsLW9wYWNpdHk9IjAuNSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMjAgMTAuOWw2LjYtNC44IDguMSA0LjQtNi42IDQuOC04LjEtNC40ek0xMy40IDYuMWw2LjYgNC44LTguMSA0LjQtNi42LTQuOCA4LjEtNC40em0wIDI3LjhsNi42LTQuOC04LjEgNC40LTYuNi00LjggOC4xLTQuNHpNMjAgMjkuMWw2LjYgNC44IDguMS00LjQtNi42LTQuOC04LjEtNC40eiIvPjwvZz48L3N2Zz4='); opacity: 0.2; }
+        .r-pattern-header { position: relative; border-bottom: 2px solid #854d0e; font-weight: 900; font-size: 1.4rem; color: #854d0e; padding-bottom: 5px; margin-bottom: 1rem; }
+        .prod-name-r-pattern { position: relative; font-size: 1.8rem; font-weight: 800; color: #422006; }
+        .r-pattern-price-wrap { position: relative; margin-top: 1rem; }
+        .r-pattern-price { font-size: 3rem; font-weight: 900; color: #b45309; }
+        .r-pattern-footer { position: relative; margin-top: auto; font-style: italic; color: #713f12; }
+
+        /* Ramadan Classic */
+        .r-classic-template { background: #064e3b; color: #fde68a; border: 5px double #fde68a; }
+        .r-classic-top { border-bottom: 1px solid #fde68a; font-weight: 800; padding: 0.5rem; letter-spacing: 2px; }
+        .prod-name-r-classic { font-size: 1.8rem; font-weight: 700; color: #fff; margin-top: 1rem; }
+        .r-cl-curr { font-size: 1.2rem; margin-right: 5px; opacity: 0.8; }
+        .r-cl-amt { font-size: 3.5rem; font-weight: 900; }
+        .r-classic-bottom { margin-top: auto; padding: 0.5rem; background: rgba(253, 230, 138, 0.1); }
+
+        /* Ramadan Modern */
+        .r-modern-template { background: #fff; }
+        .r-modern-side { position: absolute; left: 0; top: 0; bottom: 0; width: 10px; background: #6366f1; }
+        .r-modern-header { text-align: right; color: #6366f1; font-weight: 300; font-size: 1.5rem; letter-spacing: -1px; }
+        .prod-name-r-modern { font-size: 2.2rem; font-weight: 900; color: #1e1b4b; text-align: left; line-height: 1; }
+        .r-modern-price { font-size: 3.5rem; font-weight: 900; color: #6366f1; text-align: left; }
+        .r-modern-symbol { font-size: 1.5rem; vertical-align: top; }
+        .r-modern-footer { margin-top: auto; font-size: 0.6rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; text-align: left; }
+
+        /* Ramadan Royal */
+        .r-royal-template { background: #4c1d95; color: #fff; }
+        .r-royal-border { position: absolute; inset: 10px; border: 1px solid rgba(245, 158, 11, 0.5); }
+        .r-royal-header { font-size: 1.4rem; font-weight: 900; color: #fbbf24; text-align: center; margin: 0 0 1rem 0; padding: 10px; border-bottom: 1px solid #fbbf24; }
+        .prod-name-r-royal { font-size: 1.8rem; font-weight: 800; color: #fff; }
+        .r-royal-price-box { background: #fbbf24; color: #4c1d95; padding: 10px; border-radius: 0 20px 0 20px; display: inline-block; margin-top: 1rem; }
+        .r-royal-label { font-size: 0.6rem; font-weight: bold; text-transform: uppercase; }
+        .r-royal-value { font-size: 2.2rem; font-weight: 900; }
+        .r-royal-footer { margin-top: auto; font-size: 0.8rem; color: #f59e0b; }
+
+        /* Ramadan Floral */
+        .r-floral-template { background: #fff1f2; }
+        .r-floral-bg { position: absolute; inset:0; background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjYmJlMWVmIiBmaWxsLW9wYWNpdHk9IjAuNCI+PHBhdGggZD0iTTEwIDlsMSAxLTEgMS0xLTF6bTUgNWwxIDEtMSAxLTEtMXpNNSA1bDEgMS0xIDEtMS0xeiIvPjwvZz48L3N2Zz4='); opacity: 0.5; }
+        .r-floral-header { position: relative; color: #be123c; font-weight: 900; font-size: 1.4rem; border-bottom: 2px dashed #fb7185; }
+        .prod-name-r-floral { position: relative; font-size: 1.8rem; font-weight: 800; color: #881337; margin: 0.5rem 0; }
+        .r-floral-price { position: relative; font-size: 3.5rem; font-weight: 900; color: #e11d48; }
+        .r-floral-footer { position: relative; margin-top: auto; color: #9f1239; font-weight: bold; }
+
+        /* Ramadan Moonlight */
+        .r-moonlight-template { background: #0c0a09; color: #e7e5e4; }
+        .r-moon-glow { position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); }
+        .r-moon-header { font-weight: 900; color: #fff; letter-spacing: 5px; opacity: 0.9; margin-bottom: 2rem; }
+        .prod-name-r-moon { font-size: 1.8rem; font-weight: 300; letter-spacing: 1px; color: #fff; }
+        .r-moon-price-tag { font-size: 3rem; font-weight: 900; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); margin-top: 1rem; }
+        .r-moon-footer { margin-top: auto; border-top: 1px solid #292524; padding-top: 1rem; opacity: 0.5; }
+
+        /* Ramadan Sunset */
+        .r-sunset-template { background: #7c2d12; color: #fde68a; }
+        .r-sunset-gradient { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(234, 88, 12, 0.4) 0%, transparent 100%); }
+        .r-sunset-header { position: relative; font-weight: 800; font-size: 1.2rem; background: #ea580c; color: #fff; padding: 5px 15px; border-radius: 20px; display: inline-block; }
+        .prod-name-r-sunset { position: relative; font-size: 1.8rem; font-weight: 900; color: #fff; margin-top: 1rem; }
+        .r-sunset-price { position: relative; font-size: 4rem; font-weight: 900; }
+        .r-sunset-curr { font-size: 1.5rem; vertical-align: top; }
+        .r-sunset-footer { position: relative; margin-top: auto; font-weight: bold; }
+
+        /* Ramadan Oasis */
+        .r-oasis-template { background: #ecfdf5; border: 8px solid #065f46; }
+        .r-oasis-palms { position: absolute; bottom: 10px; right: 10px; font-size: 3rem; opacity: 0.1; }
+        .r-oasis-header { background: #065f46; color: #fff; padding: 0.5rem; font-weight: 900; margin: -1.5rem -1.5rem 1rem -1.5rem; }
+        .prod-name-r-oasis { font-size: 1.8rem; font-weight: 800; color: #064e3b; }
+        .r-oasis-price-box { border-bottom: 4px solid #10b981; display: inline-block; padding: 0.5rem 1rem; }
+        .r-oasis-price { font-size: 3rem; font-weight: 900; color: #065f46; }
+        .r-oasis-footer { margin-top: auto; color: #065f46; font-weight: bold; }
+
+        /* Ramadan Mosque */
+        .r-mosque-template { background: #1e1b4b; color: #a5b4fc; }
+        .r-mosque-silhouette { position: absolute; bottom:0; left:0; width:100%; height:100px; background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMjAwIDUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDUwIFY0MCBDMTAgNDAgMjAgMzAgMjAgMzAgQzIwIDMwIDMwIDIwIDMwIDEwIEMzMCAxMCA0MCAwIDQwIDAgQzQwIDAgNTAgMTAgNTAgMTAgQzUwIDEwIDYwIDMwIDYwIDMwIEM2MCAzMCA3MCA0MCA4MCA0MCBWNTAgSDAgeiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg=='); background-repeat: repeat-x; background-position: bottom; }
+        .r-mosque-header { font-weight: 900; font-size: 1.4rem; padding: 1rem; border: 1px solid rgba(165, 180, 252, 0.3); }
+        .prod-name-r-mosque { font-size: 1.8rem; font-weight: 700; color: #fff; margin-top: 1rem; }
+        .r-mosque-price { font-size: 3.5rem; font-weight: 900; color: #818cf8; }
+        .r-mosque-footer { margin-top: auto; font-size: 0.8rem; opacity: 0.6; }
+
+        /* Ramadan Stars */
+        .r-stars-template { background: #000; color: #fff; }
+        .r-stars-container { position: absolute; inset:0; background-image: radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 50px 160px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)); background-repeat: repeat; background-size: 200px 200px; }
+        .r-stars-header { background: linear-gradient(90deg, #ffd700, #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; font-size: 1.5rem; padding: 1rem 0; }
+        .prod-name-r-stars { font-size: 1.8rem; font-weight: 800; }
+        .r-stars-price-badge { border: 2px solid #ffd700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); padding: 5px 20px; border-radius: 50px; display: inline-block; margin-top: 1rem; }
+        .r-stars-price { font-size: 2.5rem; font-weight: 900; color: #ffd700; }
+        .r-stars-footer { margin-top: auto; color: #aaa; }
+
+        /* Ramadan Kareem Badge */
+        .r-kareem-template { background: #fdfdfd; border: 1px solid #ccc; }
+        .r-kareem-badge { position: absolute; top: 10px; left: 10px; background: #d42027; color: #fff; font-size: 0.6rem; font-weight: 900; padding: 2px 8px; transform: rotate(-5deg); box-shadow: 2px 2px 0 #000; }
+        .r-kareem-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: #064e3b; margin-top: 2rem; }
+        .prod-name-r-kareem { font-size: 1.5rem; font-weight: 400; color: #333; }
+        .r-kareem-price { font-size: 3.5rem; font-weight: 900; color: #d42027; }
+        .r-kareem-footer { margin-top: auto; border-top: 2px solid #064e3b; padding-top: 5px; font-weight: 800; }
+
+        /* Ramadan Mubarak */
+        .r-mubarak-template { background: #fff8e1; border: 8px solid #3e2723; }
+        .r-mubarak-header { background: #3e2723; color: #fff; padding: 0.5rem; font-weight: 900; margin: -1.5rem -1.5rem 1rem -1.5rem; }
+        .prod-name-r-mubarak { font-size: 1.8rem; font-weight: 800; color: #3e2723; }
+        .r-mubarak-price-wrap { border: 2px solid #3e2723; padding: 1rem; margin-top: 1rem; }
+        .r-mubarak-label { font-size: 0.6rem; font-weight: bold; color: #5d4037; }
+        .r-mubarak-price { font-size: 2.5rem; font-weight: 900; color: #e64a19; }
+        .r-mubarak-footer { margin-top: auto; font-weight: 900; }
 
         /* Basic Minimal */
         .minimal-template { background: #fff; border: 1px solid #ddd; }
