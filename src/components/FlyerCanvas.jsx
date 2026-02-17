@@ -12,7 +12,7 @@ const FlyerCanvas = ({ data, template, onFocusField, activeImageIndex, onSelectI
       return (
         <motion.div
           key={img.id || idx}
-          className={`img-container-${className}`}
+          className={`img-container-${className} ${isActive && isInteractive ? 'active-selection' : ''}`}
           style={{
             position: idx === 0 ? 'relative' : 'absolute',
             top: 0,
@@ -21,8 +21,6 @@ const FlyerCanvas = ({ data, template, onFocusField, activeImageIndex, onSelectI
             y: img.y,
             zIndex: idx,
             cursor: isInteractive ? 'move' : 'default',
-            outline: isActive && isInteractive ? '2px dashed var(--secondary, #F4A261)' : 'none',
-            outlineOffset: '-2px'
           }}
           drag={isActive && isInteractive}
           dragMomentum={false}
@@ -519,6 +517,17 @@ const FlyerCanvas = ({ data, template, onFocusField, activeImageIndex, onSelectI
         .minimal-header { border-bottom: 2px solid #2D5A27; padding-bottom: 0.5rem; margin-bottom: 0.5rem; }
         .price-minimal { font-size: 3rem; font-weight: 800; color: #1a1a1a; margin: 0.5rem 0; }
         .footer-note { color: #999; font-style: italic; font-size: 0.8rem; margin-top: auto; }
+      `}</style>
+      <style>{`
+        .active-selection {
+          outline: 2px dashed var(--secondary, #F4A261);
+          outline-offset: -2px;
+        }
+        @media print {
+          .active-selection {
+            outline: none !important;
+          }
+        }
       `}</style>
     </div>
   );

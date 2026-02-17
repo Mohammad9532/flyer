@@ -223,6 +223,9 @@ function SingleFlyer() {
         setIsBatchExporting(true);
         setIsBulkOpen(false); // Close modal during processing
 
+        const originalActiveIndex = activeImageIndex;
+        setActiveImageIndex(-1);
+
         try {
             for (let i = 0; i < queue.length; i++) {
                 const item = queue[i];
@@ -235,10 +238,7 @@ function SingleFlyer() {
                     price: item.price,
                     discount: item.discount,
                     description: item.description,
-                    image: item.img,
-                    imageScale: 1,
-                    imageX: 0,
-                    imageY: 0
+                    images: [{ url: item.img, scale: 1, x: 0, y: 0, id: Date.now() }]
                 }));
 
                 // 2. Wait for React to render and fonts to settle
@@ -262,9 +262,10 @@ function SingleFlyer() {
         } catch (error) {
             console.error('Batch Export Error', error);
             alert('Batch export failed. Some images might not have downloaded.');
+        } finally {
+            setIsBatchExporting(false);
+            setActiveImageIndex(originalActiveIndex);
         }
-
-        setIsBatchExporting(false);
     };
 
     const handleApplyBulkItem = (bulkItem) => {
@@ -282,8 +283,14 @@ function SingleFlyer() {
         const canvas = document.querySelector('.flyer-canvas');
         if (!canvas) return;
 
+        // Temporarily hide selection highlight
+        const prevActive = activeImageIndex;
+        setActiveImageIndex(-1);
+
         try {
-            // High quality export
+            // Wait for React to re-render without the highlight
+            await sleep(50);
+
             const dataUrl = await window.htmlToImage.toPng(canvas, {
                 quality: 1,
                 pixelRatio: 2
@@ -296,6 +303,8 @@ function SingleFlyer() {
         } catch (error) {
             console.error('Download failed', error);
             alert('Failed to save image. Try printing to PDF instead.');
+        } finally {
+            setActiveImageIndex(prevActive);
         }
     };
 

@@ -169,10 +169,18 @@ const Grid2x2Flyer = () => {
         return () => window.removeEventListener('resize', updateScale);
     }, []);
 
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
     const handleDownloadImage = async () => {
         const canvas = document.querySelector('.grid2x2-canvas');
         if (!canvas) return;
+
+        // Temporarily hide selection highlight
+        const prevActive = activeImageIndex;
+        setActiveImageIndex(-1);
+
         try {
+            await sleep(50);
             const dataUrl = await window.htmlToImage.toPng(canvas, {
                 quality: 1,
                 pixelRatio: 2
@@ -184,6 +192,8 @@ const Grid2x2Flyer = () => {
         } catch (error) {
             console.error('Download failed', error);
             alert('Failed to save image.');
+        } finally {
+            setActiveImageIndex(prevActive);
         }
     };
 
