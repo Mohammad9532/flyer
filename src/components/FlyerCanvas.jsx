@@ -1,19 +1,19 @@
 import React from 'react';
 
 const FlyerCanvas = ({ data, template, onFocusField }) => {
-  const { productName, price, originalPrice, currency, discount, description, image, logo, branding, imageScale, imageX, imageY, fontFamily, paperSize } = data;
+  const { productName, price, originalPrice, currency, discount, description, images, logo, branding, fontFamily, paperSize } = data;
 
   const renderTemplate = () => {
-    const commonImg = (className) => image && (
-      <div className={`img-container-${className}`}>
+    const renderImages = (className) => (images || []).map((img, idx) => (
+      <div key={img.id || idx} className={`img-container-${className}`} style={{ position: idx === 0 ? 'relative' : 'absolute', top: 0, left: 0, zIndex: idx }}>
         <img
-          src={image}
+          src={img.url}
           className={`product-img-${className}`}
           alt="Product"
-          style={{ transform: `scale(${imageScale}) translate(${imageX}px, ${imageY}px)` }}
+          style={{ transform: `scale(${img.scale}) translate(${img.x}px, ${img.y}px)` }}
         />
       </div>
-    );
+    ));
 
     const renderLogo = (className, fallbackText) => {
       if (logo) {
@@ -36,7 +36,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
               <p className="description-new">{description || 'Fresh quality selection'}</p>
             </div>
 
-            {commonImg('standard')}
+            {renderImages('standard')}
 
             <div className="content-box-new" onClick={f('price')}>
               <div className="price-tag-new">
@@ -53,7 +53,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
           <div className="flyer-inner bold-template text-center">
             <div className="brand-header">{renderLogo('bold-header')}</div>
             <h1 className="prod-name-bold">{productName || 'PRODUCT NAME'}</h1>
-            {commonImg('bold')}
+            {renderImages('bold')}
             <div className="price-box-bold">
               <div className="price-main"><span className="curr-sm">{currency}</span>{price || '0.00'}</div>
               {discount && <div className="discount-banner">{discount}</div>}
@@ -64,7 +64,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner bogo-template text-center">
             <div className="bogo-header">BUY 1 GET 1 <span className="free-text">FREE</span></div>
-            {commonImg('bogo')}
+            {renderImages('bogo')}
             <div className="bogo-content">
               <h2 className="prod-name-bogo">{productName || 'PRODUCT NAME'}</h2>
               <div className="bogo-price">
@@ -79,7 +79,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner organic-template">
             <div className="organic-leaf">🍃 ORGANIC</div>
-            {commonImg('organic')}
+            {renderImages('organic')}
             <div className="organic-info">
               <h2 className="prod-name-org">{productName || 'Fresh Organic'}</h2>
               <p className="org-sub">Farm to Table Freshness</p>
@@ -95,7 +95,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner clearance-template">
             <div className="clearance-banner">CLEARANCE</div>
-            {commonImg('clearance')}
+            {renderImages('clearance')}
             <div className="clearance-content">
               <h1 className="prod-name-clearance">{productName || 'MUST GO ITEM'}</h1>
               <div className="clearance-price-row">
@@ -113,7 +113,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner new-template">
             <div className="new-badge">NEW ITEM</div>
-            {commonImg('new')}
+            {renderImages('new')}
             <div className="new-container">
               <h2 className="prod-name-new">{productName || 'LATEST ARRIVAL'}</h2>
               <div className="new-price-wrap">
@@ -128,7 +128,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner manager-template">
             <div className="manager-seal">MANAGER'S CHOICE ★★★</div>
-            {commonImg('manager')}
+            {renderImages('manager')}
             <div className="manager-content">
               <h3 className="manager-note">"I personally recommend this for its quality and value."</h3>
               <h2 className="prod-name-manager">{productName || 'Store Special'}</h2>
@@ -143,7 +143,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner flash-template">
             <div className="flash-header">⚡ FLASH SALE ⚡</div>
-            {commonImg('flash')}
+            {renderImages('flash')}
             <div className="flash-body text-center">
               <h2 className="prod-name-flash">{productName || 'LIMITED TIME'}</h2>
               <div className="flash-timer">END IN 24 HOURS</div>
@@ -158,7 +158,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner healthy-template">
             <div className="healthy-heading">❤️ HEALTHY CHOICE</div>
-            {commonImg('healthy')}
+            {renderImages('healthy')}
             <div className="healthy-info text-center">
               <h2 className="prod-name-healthy">{productName || 'Nutritious Item'}</h2>
               <div className="healthy-stats">LOW FAT • HIGH FIBER</div>
@@ -173,7 +173,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner ramadan-template">
             <div className="ramadan-moon">🌙 Ramadan Kareem</div>
-            {commonImg('ramadan')}
+            {renderImages('ramadan')}
             <div className="ramadan-info text-center">
               <h2 className="prod-name-ramadan">{productName || 'RAMADAN SPECIAL'}</h2>
               <div className="ramadan-price">
@@ -188,7 +188,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner iftar-template">
             <div className="iftar-header">✨ IFTAR SPECIAL ✨</div>
-            {commonImg('iftar')}
+            {renderImages('iftar')}
             <div className="iftar-content">
               <h2 className="prod-name-iftar">{productName || 'Iftar Box / Dates'}</h2>
               <p className="iftar-sub">Break your fast with quality</p>
@@ -204,7 +204,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner suhoor-template">
             <div className="suhoor-badge">SUHOOR ESSENTIALS</div>
-            {commonImg('suhoor')}
+            {renderImages('suhoor')}
             <div className="suhoor-body text-center">
               <h2 className="prod-name-suhoor">{productName || 'Fresh Milk / Yogurt'}</h2>
               <div className="suhoor-promo">{discount || 'Healthy Morning'}</div>
@@ -220,7 +220,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner member-template">
             <div className="member-label">LOYALTY MEMBER ONLY</div>
-            {commonImg('member')}
+            {renderImages('member')}
             <div className="member-box">
               <h2 className="prod-name-member">{productName || 'Exclusive Deal'}</h2>
               <div className="member-price-row">
@@ -238,7 +238,7 @@ const FlyerCanvas = ({ data, template, onFocusField }) => {
         return (
           <div className="flyer-inner minimal-template">
             <div className="minimal-header"><h3>{renderLogo('minimal-header')}</h3></div>
-            {commonImg('minimal')}
+            {renderImages('minimal')}
             <div className="minimal-info text-center">
               <h1 className="prod-name">{productName || 'Product Name'}</h1>
               <div className="price-minimal">{currency}{price || '0.00'}</div>
