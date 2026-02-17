@@ -1,7 +1,7 @@
 import React from 'react';
 import FlyerCanvas from './FlyerCanvas';
 
-const Grid2x2Canvas = ({ items, template, branding, logo, fontFamily }) => {
+const Grid2x2Canvas = ({ items, template, branding, logo, fontFamily, activeProductIndex, activeImageIndex, onSelectImage, onUpdateImage }) => {
     return (
         <div className="grid2x2-canvas" style={{
             width: '8.27in',
@@ -29,6 +29,9 @@ const Grid2x2Canvas = ({ items, template, branding, logo, fontFamily }) => {
                             paperSize: 'a4' // Miniaturized within the grid
                         }}
                         template={template}
+                        activeImageIndex={activeProductIndex === idx ? activeImageIndex : -1}
+                        onSelectImage={(imgIdx) => onSelectImage?.(idx, imgIdx)}
+                        onUpdateImage={(imgIdx, updates) => onUpdateImage?.(idx, imgIdx, updates)}
                     />
                 </div>
             ))}

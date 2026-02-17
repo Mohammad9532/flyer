@@ -105,16 +105,11 @@ function SingleFlyer() {
         }
     };
 
-    const handleApplyAdjustment = (adj) => {
+    const handleUpdateImage = (index, updates) => {
         setData(prev => {
             const newImages = [...prev.images];
-            if (newImages[activeImageIndex]) {
-                newImages[activeImageIndex] = {
-                    ...newImages[activeImageIndex],
-                    scale: adj.scale,
-                    x: adj.x,
-                    y: adj.y
-                };
+            if (newImages[index]) {
+                newImages[index] = { ...newImages[index], ...updates };
             }
             return { ...prev, images: newImages };
         });
@@ -348,7 +343,14 @@ function SingleFlyer() {
                             alignItems: 'center',
                             justifyContent: 'center'
                         }}>
-                            <FlyerCanvas data={data} template={template} onFocusField={focusField} />
+                            <FlyerCanvas
+                                data={data}
+                                template={template}
+                                onFocusField={focusField}
+                                activeImageIndex={activeImageIndex}
+                                onSelectImage={setActiveImageIndex}
+                                onUpdateImage={handleUpdateImage}
+                            />
                         </div>
                     </div>
 
@@ -483,6 +485,24 @@ function SingleFlyer() {
                                 ))}
                             </div>
 
+                            {data.images?.[activeImageIndex] && (
+                                <div className="active-img-zoom mt-3">
+                                    <div className="field-label flex justify-between">
+                                        <span>Scale: {Math.round(data.images[activeImageIndex].scale * 100)}%</span>
+                                        <button onClick={() => setIsAdjusterOpen(true)} className="text-secondary text-xs font-bold">DEEP ADJUST</button>
+                                    </div>
+                                    <input
+                                        type="range"
+                                        min="0.1"
+                                        max="4"
+                                        step="0.01"
+                                        value={data.images[activeImageIndex].scale}
+                                        onChange={(e) => handleUpdateImage(activeImageIndex, { scale: parseFloat(e.target.value) })}
+                                        className="studio-range w-full"
+                                    />
+                                </div>
+                            )}
+
                             <style>{`
                                 .images-list-mini { display: flex; flex-direction: column; gap: 0.5rem; max-height: 200px; overflow-y: auto; padding-right: 5px; }
                                 .image-item-row { display: flex; align-items: center; gap: 0.8rem; background: #1a1a1a; padding: 0.5rem; border-radius: 8px; border: 1px solid #333; cursor: pointer; transition: all 0.2s; }
@@ -550,7 +570,7 @@ function SingleFlyer() {
             <ImageAdjuster
                 isOpen={isAdjusterOpen}
                 onClose={() => setIsAdjusterOpen(false)}
-                onApply={handleApplyAdjustment}
+                onApply={(adj) => handleUpdateImage(activeImageIndex, adj)}
                 image={data.images?.[activeImageIndex]?.url}
                 initialScale={data.images?.[activeImageIndex]?.scale || 1}
                 initialX={data.images?.[activeImageIndex]?.x || 0}

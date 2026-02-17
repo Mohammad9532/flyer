@@ -1,19 +1,60 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
-const FlyerCanvas = ({ data, template, onFocusField }) => {
+const FlyerCanvas = ({ data, template, onFocusField, activeImageIndex, onSelectImage, onUpdateImage }) => {
   const { productName, price, originalPrice, currency, discount, description, images, logo, branding, fontFamily, paperSize } = data;
 
   const renderTemplate = () => {
-    const renderImages = (className) => (images || []).map((img, idx) => (
-      <div key={img.id || idx} className={`img-container-${className}`} style={{ position: idx === 0 ? 'relative' : 'absolute', top: 0, left: 0, zIndex: idx }}>
-        <img
-          src={img.url}
-          className={`product-img-${className}`}
-          alt="Product"
-          style={{ transform: `scale(${img.scale}) translate(${img.x}px, ${img.y}px)` }}
-        />
-      </div>
-    ));
+    const renderImages = (className) => (images || []).map((img, idx) => {
+      const isActive = activeImageIndex === idx;
+      const isInteractive = !!onUpdateImage;
+
+      return (
+        <motion.div
+          key={img.id || idx}
+          className={`img-container-${className}`}
+          style={{
+            position: idx === 0 ? 'relative' : 'absolute',
+            top: 0,
+            left: 0,
+            x: img.x,
+            y: img.y,
+            zIndex: idx,
+            cursor: isInteractive ? 'move' : 'default',
+            outline: isActive && isInteractive ? '2px dashed var(--secondary, #F4A261)' : 'none',
+            outlineOffset: '-2px'
+          }}
+          drag={isActive && isInteractive}
+          dragMomentum={false}
+          dragElastic={0}
+          onDragEnd={(e, info) => {
+            if (isActive && onUpdateImage) {
+              onUpdateImage(idx, {
+                x: img.x + info.offset.x,
+                y: img.y + info.offset.y
+              });
+            }
+          }}
+          onClick={(e) => {
+            if (isInteractive) {
+              e.stopPropagation();
+              onSelectImage?.(idx);
+            }
+          }}
+        >
+          <img
+            src={img.url}
+            className={`product-img-${className}`}
+            alt="Product"
+            style={{
+              transform: `scale(${img.scale})`,
+              pointerEvents: 'none',
+              transformOrigin: 'center center'
+            }}
+          />
+        </motion.div>
+      );
+    });
 
     const renderLogo = (className, fallbackText) => {
       if (logo) {

@@ -11,6 +11,7 @@ const Grid2x2Flyer = () => {
     const [logo, setLogo] = useState(null);
     const [branding, setBranding] = useState('SUPERMARKET FLYER HUB');
     const [isAdjusterOpen, setIsAdjusterOpen] = useState(false);
+    const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [isRemoving, setIsRemoving] = useState(false);
     const apiKey = import.meta.env.VITE_REMOVE_BG_API_KEY;
 
@@ -68,17 +69,20 @@ const Grid2x2Flyer = () => {
         }
     };
 
-    const handleApplyAdjustment = (adj) => {
+    const handleCanvasSelect = (prodIdx, imgIdx) => {
+        setActiveProductIndex(prodIdx);
+        setActiveImageIndex(imgIdx);
+    };
+
+    const handleCanvasUpdate = (prodIdx, imgIdx, updates) => {
         const newProducts = [...products];
-        if (newProducts[activeProductIndex].images[0]) {
-            newProducts[activeProductIndex].images[0] = {
-                ...newProducts[activeProductIndex].images[0],
-                scale: adj.scale,
-                x: adj.x,
-                y: adj.y
+        if (newProducts[prodIdx].images[imgIdx]) {
+            newProducts[prodIdx].images[imgIdx] = {
+                ...newProducts[prodIdx].images[imgIdx],
+                ...updates
             };
+            setProducts(newProducts);
         }
-        setProducts(newProducts);
     };
 
     const handleRemoveBackground = async (index) => {
@@ -212,15 +216,17 @@ const Grid2x2Flyer = () => {
             <main className="studio-main">
                 <section className="studio-workspace">
                     <div className="canvas-viewport" ref={viewportRef}>
-                        <div className="canvas-preview-wrapper" style={{ transform: `scale(${viewScale})` }}>
-                            <Grid2x2Canvas
-                                items={products}
-                                template={template}
-                                fontFamily={fontFamily}
-                                logo={logo}
-                                branding={branding}
-                            />
-                        </div>
+                        <Grid2x2Canvas
+                            items={products}
+                            template={template}
+                            fontFamily={fontFamily}
+                            logo={logo}
+                            branding={branding}
+                            activeProductIndex={activeProductIndex}
+                            activeImageIndex={activeImageIndex}
+                            onSelectImage={handleCanvasSelect}
+                            onUpdateImage={handleCanvasUpdate}
+                        />
                     </div>
 
                     <div className="template-dock">
@@ -404,6 +410,23 @@ const Grid2x2Flyer = () => {
                                     onChange={(e) => handleImageUpload(activeProductIndex, e)}
                                     className="hidden"
                                 />
+
+                                {products[activeProductIndex].images?.[0] && (
+                                    <div className="active-img-zoom mt-3">
+                                        <div className="field-label flex justify-between" style={{ fontSize: '0.7rem', color: '#888', marginBottom: '4px' }}>
+                                            <span>Scale: {Math.round(products[activeProductIndex].images[0].scale * 100)}%</span>
+                                        </div>
+                                        <input
+                                            type="range"
+                                            min="0.1"
+                                            max="4"
+                                            step="0.01"
+                                            value={products[activeProductIndex].images[0].scale}
+                                            onChange={(e) => handleCanvasUpdate(activeProductIndex, 0, { scale: parseFloat(e.target.value) })}
+                                            className="studio-range w-full"
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -413,7 +436,7 @@ const Grid2x2Flyer = () => {
             <ImageAdjuster
                 isOpen={isAdjusterOpen}
                 onClose={() => setIsAdjusterOpen(false)}
-                onApply={handleApplyAdjustment}
+                onApply={(adj) => handleCanvasUpdate(activeProductIndex, 0, adj)}
                 image={products[activeProductIndex].images?.[0]?.url}
                 initialScale={products[activeProductIndex].images?.[0]?.scale || 1}
                 initialX={products[activeProductIndex].images?.[0]?.x || 0}
